@@ -20,8 +20,49 @@ jobs:
         # https://podman.io/getting-started/installation
         sudo apt-get update -y
         sudo apt-get install podman -y
-        podman info #his command displays the information related to the host such as the Kernel version, swap space used
-        podman build . # build local image
+        #displays the information related to the host such as the Kernel version, swap space used
+        podman info 
+        podman ps -a     
+        ls -lai /var/lib/containers #Podman’s local repository
+    - name: "Pull Alpine image"
+      run: |
+        podman pull alpine
+        podman run --rm alpine uname -a  
+        podman images #lists all the images    
+        podman ps --all # To include stopped / exited containers
+        ls -lai /var/lib/containers #Podman’s local repository
+    - name: "Pull ubuntu image"
+      run: |
+        podman pull ubuntu
+        #run a simple container using Ubuntu image which prints a message               
+        podman run --rm ubuntu /bin/echo "Hola podman" 
+        podman images #lists all the images 
+        podman ps --all # To include stopped / exited containers
+    - name: "Pull centos image"
+      run: |
+        podman pull centos:8
+        podman run --rm centos uname -a     
+        podman images #lists all the images 
+        podman ps --all # To include stopped / exited containers        
+    - name: "build local image"
+      run: |
+        podman build . # build local image    
+        podman images #lists all the images 
+        podman ps --all # To include stopped / exited containers  
+    - name: "build local image Dockerfile"
+      run: |
+        cat Dockerfile.scap | podman build -f - . # build local image    
+        podman images #lists all the images 
+        podman ps --all # To include stopped / exited containers        
+    - name: "create a pod"
+      run: |
+        #create a pod called web,By default, the created pod will have a container called infra
+        podman pod create --name web 
+        podman pod list
+        #The infra container is in sleep mode and its purpose is to hold the namespaces associated with the pod to allow podman to connect other container
+        podman ps -a --pod
+        podman run -dt --pod web alpine:latest top # add a container to the podz
+        podman ps -a --pod # pause containers
 
      
 

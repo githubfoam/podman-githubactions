@@ -11,4 +11,16 @@ RUN echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selectio
     apt depends kali-tools-forensics  && \
     apt show kali-tools-forensics && \
     apt-cache show kali-tools-forensics | grep Depends && \
-    echo 
+    echo "########################### METAPACKAGE INFO ###########################"
+
+# custom packages
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    aircrack-ng \
+    ncat  \
+    tor  \    
+    strace \
+    ltrace \
+    # https://github.com/danielmiessler/SecLists
+    seclists \ 
+    ansible \
+    hping3
