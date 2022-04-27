@@ -1,0 +1,33 @@
+name: "python venv CI workflow"
+
+
+on:
+  push:
+    branches: [ test ]
+
+
+jobs:
+
+  podman-ubuntu-1804-job:
+    name: "podman testing on ubuntu-18.04"
+    runs-on: ubuntu-18.04
+    steps:
+    - uses: actions/checkout@v2
+    - name: "os fingerprinting"
+      run: hostnamectl status  
+    - name: "podman testing"
+      run: |
+        pip3 install virtualenv
+        virtualenv -p $(which python3) ~venvpy3
+        source ~venvpy3/bin/activate
+        python --version
+        # https://podman.io/getting-started/installation
+        sudo apt-get update -y
+        sudo apt-get install podman -y
+        podman info #his command displays the information related to the host such as the Kernel version, swap space used
+        podman build . # build local image
+        deactivate
+
+     
+
+

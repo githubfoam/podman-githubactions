@@ -1,4 +1,14 @@
-FROM centos:latest
-RUN yum update -y && yum install httpd -y
-CMD ["/usr/sbin/httpd", "-D", "FOREGROUND"]
-EXPOSE 80
+FROM kalilinux/kali-rolling
+LABEL org.opencontainers.image.authors="githubfoam"
+
+
+#clean start
+RUN apt-get update -y && apt-get upgrade -y && apt-get autoremove && apt-get clean
+
+RUN echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selections && \
+    apt-get install -y kali-tools-forensics && \
+    echo "########################### METAPACKAGE INFO ###########################" && \
+    apt depends kali-tools-forensics  && \
+    apt show kali-tools-forensics && \
+    apt-cache show kali-tools-forensics | grep Depends && \
+    echo 
