@@ -18,7 +18,11 @@ jobs:
     - name: "podman testing"
       run: |
         # https://podman.io/getting-started/installation
+        sudo apt-get update -y
         sudo apt-get install podman -y
+        podman info #his command displays the information related to the host such as the Kernel version, swap space used
+        podman build . # build local image
+
      
 
 
