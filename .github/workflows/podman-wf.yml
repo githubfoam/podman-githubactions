@@ -56,6 +56,8 @@ jobs:
         podman ps --all # To include stopped / exited containers        
     - name: "create a pod"
       run: |
+        podman images #lists all the images 
+        podman ps --all # To include stopped / exited containers 
         #create a pod called web,By default, the created pod will have a container called infra
         podman pod create --name web 
         podman pod list

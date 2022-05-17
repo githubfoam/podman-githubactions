@@ -40,8 +40,8 @@ jobs:
           pkg-config \
           runc \
           uidmap
-      # Make sure that the Linux kernel supports user namespaces
-      zgrep CONFIG_USER_NS /proc/config.gz
+        # # Make sure that the Linux kernel supports user namespaces
+        # zgrep CONFIG_USER_NS /proc/config.gz
      
 
 
