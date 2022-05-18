@@ -51,7 +51,7 @@ jobs:
         podman ps --all # To include stopped / exited containers  
     - name: "build local image Dockerfile"
       run: |
-        cat Dockerfile.scap | podman build -f - . # build local image    
+        cat Dockerfile | podman build -f - . # build local image    
         podman images #lists all the images 
         podman ps --all # To include stopped / exited containers        
     - name: "create a pod"

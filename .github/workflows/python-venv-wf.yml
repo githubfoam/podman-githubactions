@@ -28,7 +28,7 @@ jobs:
         cd dockerfiles
         podman build . # build local image
         deactivate
-        podman build -f dockerfiles/Dockerfile.scap
+        podman build -f dockerfiles/Dockerfile
      
 
 
