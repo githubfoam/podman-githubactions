@@ -3,7 +3,7 @@ name: "python venv CI workflow"
 
 on:
   push:
-    branches: [ test ]
+    branches: [ main ]
 
 
 jobs:

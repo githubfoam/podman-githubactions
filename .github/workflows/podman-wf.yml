@@ -3,7 +3,7 @@ name: "podman CI workflow"
 
 on:
   push:
-    branches: [ test ]
+    branches: [ main ]
 
 
 jobs:
